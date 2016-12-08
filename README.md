@@ -1,2 +1,2 @@
-gitの使い方
-git status ファイルの状態確認
+# gitの使い方
+* git status ファイルの状態確認
