@@ -137,8 +137,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 textView.setText(textView.getText() + " + ");
                 break;
             case R.id.button_equal:
-                String answer = add(textView.getText().toString());
-                textView.setText(textView.getText() + " = " + answer);
+                String answer = calc(textView.getText().toString());
+                textView.setText(answer);
                 break;
             case R.id.button_clear:
                 textView.setText("");
@@ -146,8 +146,18 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
     }
 
-    public String add(String text) {
+    public String calc(String text) {
         String[] inputs = text.split(" ", 0);
-        return String.valueOf(Integer.parseInt(inputs[0]) + Integer.parseInt(inputs[2]));
+
+        if(text.contains("+")){
+            return String.valueOf(Integer.parseInt(inputs[0]) + Integer.parseInt(inputs[2]));
+        }else if(text.contains("-")){
+            return String.valueOf(Integer.parseInt(inputs[0]) - Integer.parseInt(inputs[2]));
+        }else if(text.contains("*")){
+            return String.valueOf(Integer.parseInt(inputs[0]) * Integer.parseInt(inputs[2]));
+        }else if(text.contains("/")){
+            return String.valueOf(Integer.parseInt(inputs[0]) / Integer.parseInt(inputs[2]));
+        }
+        return inputs[0];
     }
 }
