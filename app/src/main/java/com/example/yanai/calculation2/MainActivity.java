@@ -149,18 +149,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     public String calc(String text) {
         String[] inputs = text.split(" ", 0);
 
-        if(inputs.length < 3){
-            return inputs[0];
-        }
-
-        if(text.contains("+")){
-            return String.valueOf(Integer.parseInt(inputs[0]) + Integer.parseInt(inputs[2]));
-        }else if(text.contains("-")){
-            return String.valueOf(Integer.parseInt(inputs[0]) - Integer.parseInt(inputs[2]));
-        }else if(text.contains("*")){
-            return String.valueOf(Integer.parseInt(inputs[0]) * Integer.parseInt(inputs[2]));
-        }else if(text.contains("/")){
-            return String.valueOf(Integer.parseInt(inputs[0]) / Integer.parseInt(inputs[2]));
+        try {
+            if (text.contains("+")) {
+                return String.valueOf(Integer.parseInt(inputs[0]) + Integer.parseInt(inputs[2]));
+            } else if (text.contains("-")) {
+                return String.valueOf(Integer.parseInt(inputs[0]) - Integer.parseInt(inputs[2]));
+            } else if (text.contains("*")) {
+                return String.valueOf(Integer.parseInt(inputs[0]) * Integer.parseInt(inputs[2]));
+            } else if (text.contains("/")) {
+                return String.valueOf(Integer.parseInt(inputs[0]) / Integer.parseInt(inputs[2]));
+            }
+        } catch (NumberFormatException e) {
+            return "error";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "error";
         }
         return inputs[0];
     }
