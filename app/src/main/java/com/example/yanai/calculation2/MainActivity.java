@@ -10,22 +10,22 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     //宣言
-     Button button1;
-     Button button2;
-     Button button3;
-     Button button4;
-     Button button5;
-     Button button6;
-     Button button7;
-     Button button8;
-     Button button9;
-     Button button0;
-     Button button_divide;
-     Button button_multiply ;
-     Button button_minus;
-     Button button_plus;
-     Button button_clear;
-     Button button_equal;
+    Button button1;
+    Button button2;
+    Button button3;
+    Button button4;
+    Button button5;
+    Button button6;
+    Button button7;
+    Button button8;
+    Button button9;
+    Button button0;
+    Button button_divide;
+    Button button_multiply;
+    Button button_minus;
+    Button button_plus;
+    Button button_clear;
+    Button button_equal;
 
     //数字とかを記録する用の変数
     double first;
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     public void onClick(View v) {
         TextView textView = (TextView) findViewById(R.id.textView);
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.button0:
                 textView.setText(textView.getText() + "0");
                 break;
@@ -125,24 +125,29 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 textView.setText(textView.getText() + "9");
                 break;
             case R.id.button_divide:
-                textView.setText(textView.getText() + "/");
+                textView.setText(textView.getText() + " / ");
                 break;
             case R.id.button_multiply:
-                textView.setText(textView.getText() + "*");
+                textView.setText(textView.getText() + " * ");
                 break;
             case R.id.button_minus:
-                textView.setText(textView.getText() + "-");
+                textView.setText(textView.getText() + " - ");
                 break;
             case R.id.button_plus:
-                textView.setText(textView.getText() + "+");
+                textView.setText(textView.getText() + " + ");
                 break;
             case R.id.button_equal:
-                textView.setText(textView.getText() + "=");
+                String answer = add(textView.getText().toString());
+                textView.setText(textView.getText() + " = " + answer);
                 break;
             case R.id.button_clear:
                 textView.setText("");
                 break;
-
         }
+    }
+
+    public String add(String text) {
+        String[] inputs = text.split(" ", 0);
+        return String.valueOf(Integer.parseInt(inputs[0]) + Integer.parseInt(inputs[2]));
     }
 }
