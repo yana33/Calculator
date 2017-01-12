@@ -88,41 +88,54 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         button_equal = (Button) findViewById(R.id.button_equal);
         button_equal.setOnClickListener(this);
 
+        //はじめに計算ボタンを押せないように、falseにしておく。けど、なんでここ？
+        setButton(false);
     }
 
     public void onClick(View v) {
+        //textView使う時に書く
         TextView textView = (TextView) findViewById(R.id.textView);
 
         switch (v.getId()) {
             case R.id.button0:
                 textView.setText(textView.getText() + "0");
+                setButton(true);
                 break;
             case R.id.button1:
                 textView.setText(textView.getText() + "1");
+                setButton(true);
                 break;
             case R.id.button2:
                 textView.setText(textView.getText() + "2");
+                setButton(true);
                 break;
             case R.id.button3:
                 textView.setText(textView.getText() + "3");
+                setButton(true);
                 break;
             case R.id.button4:
                 textView.setText(textView.getText() + "4");
+                setButton(true);
                 break;
             case R.id.button5:
                 textView.setText(textView.getText() + "5");
+                setButton(true);
                 break;
             case R.id.button6:
                 textView.setText(textView.getText() + "6");
+                setButton(true);
                 break;
             case R.id.button7:
                 textView.setText(textView.getText() + "7");
+                setButton(true);
                 break;
             case R.id.button8:
                 textView.setText(textView.getText() + "8");
+                setButton(true);
                 break;
             case R.id.button9:
                 textView.setText(textView.getText() + "9");
+                setButton(true);
                 break;
             case R.id.button_divide:
                 textView.setText(textView.getText() + " / ");
