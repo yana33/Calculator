@@ -126,24 +126,42 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 break;
             case R.id.button_divide:
                 textView.setText(textView.getText() + " / ");
+                setButton(false);
                 break;
             case R.id.button_multiply:
                 textView.setText(textView.getText() + " * ");
+                setButton(false);
                 break;
             case R.id.button_minus:
                 textView.setText(textView.getText() + " - ");
+                setButton(false);
                 break;
             case R.id.button_plus:
                 textView.setText(textView.getText() + " + ");
+                setButton(false);
                 break;
             case R.id.button_equal:
                 String answer = calc(textView.getText().toString());
                 textView.setText(answer);
+                setButton(true);
                 break;
             case R.id.button_clear:
                 textView.setText("");
+                setButton(true);
                 break;
         }
+    }
+
+    //ボタンのオンオフを切り替えるメソッド
+    //引数をisEnabledにすれば、上でtrueとかfalseを引数に入れるだけでOK
+    public void setButton(boolean isEnabled){
+
+        //オフにしたいボタンの名前.setEnabled(オフにしたいのでfalse);
+        //()の中は名前でOK
+        button_plus.setEnabled(isEnabled);
+        button_minus.setEnabled(isEnabled);
+        button_divide.setEnabled(isEnabled);
+        button_multiply.setEnabled(isEnabled);
     }
 
     public String calc(String text) {
