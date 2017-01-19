@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     Button button_plus;
     Button button_clear;
     Button button_equal;
-    Button button_point;
+    Button button_excludingTax;
+    Button button_taxIncluded;
 
     //押してないからfalse
     //boolean isPlus = false;
@@ -84,8 +85,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         button_equal = (Button) findViewById(R.id.button_equal);
         button_equal.setOnClickListener(this);
 
-        button_point = (Button) findViewById(R.id.button_point);
-        button_point.setOnClickListener(this);
+        button_excludingTax = (Button) findViewById(R.id.button_excludingTax);
+        button_excludingTax.setOnClickListener(this);
+
+        button_taxIncluded =(Button) findViewById(R.id.button_taxIncluded);
+        button_taxIncluded.setOnClickListener(this);
 
         //はじめに計算ボタンを押せないように、falseにしておく。けど、なんでここ？
         setButton(false);
@@ -161,10 +165,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 textView.setText("");
                 setButton(false);
                 break;
-            case R.id.button_point:
-                textView.setText(textView.getText() + ".");
+            case R.id.button_excludingTax:
+                String tax2 = calcTax2(textView.getText().toString());
+                textView.setText(tax2);
                 setButton(false);
                 break;
+            case R.id.button_taxIncluded:
+                String tax1 = calcTax1(textView.getText().toString());
+                textView.setText(tax1);
+                setButton(false);
         }
     }
 
@@ -178,7 +187,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         button_minus.setEnabled(isEnabled);
         button_divide.setEnabled(isEnabled);
         button_multiply.setEnabled(isEnabled);
-        button_point.setEnabled(isEnabled);
     }
 
     public String calc(String text) {
@@ -188,13 +196,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             switch (inputs[1]) {
                 //inputs[1]は計算記号の部分だから、そこで場合分け
                 case "+":
-                    return String.valueOf(Double.parseDouble(inputs[0]) + Double.parseDouble(inputs[2]));
+                    return String.valueOf(Integer.parseInt(inputs[0]) + Integer.parseInt(inputs[2]));
                 case "-":
-                    return String.valueOf(Double.parseDouble(inputs[0]) - Double.parseDouble(inputs[2]));
+                    return String.valueOf(Integer.parseInt(inputs[0]) - Integer.parseInt(inputs[2]));
                 case "*":
-                    return String.valueOf(Double.parseDouble(inputs[0]) * Double.parseDouble(inputs[2]));
+                    return String.valueOf(Integer.parseInt(inputs[0]) * Integer.parseInt(inputs[2]));
                 case "/":
-                    return String.valueOf(Double.parseDouble(inputs[0]) / Double.parseDouble(inputs[2]));
+                    return String.valueOf(Integer.parseInt(inputs[0]) / Integer.parseInt(inputs[2]));
             }
         } catch (NumberFormatException e) {
             return "error";
@@ -204,4 +212,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         return inputs[0];
     }
 
+    public String calcTax1(String num){
+        return String.valueOf((int)(Integer.parseInt(num) * 1.08));
+    }
+
+    public String calcTax2(String num){
+        //四捨五入はMath.round(四捨五入したいの)？
+        return String.valueOf((int)Math.round(Integer.parseInt(num) / 1.08));
+    }
 }
