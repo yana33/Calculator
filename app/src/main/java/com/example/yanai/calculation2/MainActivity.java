@@ -26,14 +26,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     Button button_plus;
     Button button_clear;
     Button button_equal;
+    Button button_point;
 
-    //数字とかを記録する用の変数
-    double first;
     //押してないからfalse
     //boolean isPlus = false;
-    double second;
-    double result;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +83,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         button_equal = (Button) findViewById(R.id.button_equal);
         button_equal.setOnClickListener(this);
+
+        button_point = (Button) findViewById(R.id.button_point);
+        button_point.setOnClickListener(this);
 
         //はじめに計算ボタンを押せないように、falseにしておく。けど、なんでここ？
         setButton(false);
@@ -156,18 +155,22 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.button_equal:
                 String answer = calc(textView.getText().toString());
                 textView.setText(answer);
-                setButton(true);
+                setButton(false);
                 break;
             case R.id.button_clear:
                 textView.setText("");
-                setButton(true);
+                setButton(false);
+                break;
+            case R.id.button_point:
+                textView.setText(textView.getText() + ".");
+                setButton(false);
                 break;
         }
     }
 
     //ボタンのオンオフを切り替えるメソッド
     //引数をisEnabledにすれば、上でtrueとかfalseを引数に入れるだけでOK
-    public void setButton(boolean isEnabled){
+    public void setButton(boolean isEnabled) {
 
         //オフにしたいボタンの名前.setEnabled(オフにしたいのでfalse);
         //()の中は名前でOK
@@ -175,20 +178,23 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         button_minus.setEnabled(isEnabled);
         button_divide.setEnabled(isEnabled);
         button_multiply.setEnabled(isEnabled);
+        button_point.setEnabled(isEnabled);
     }
 
     public String calc(String text) {
         String[] inputs = text.split(" ", 0);
 
         try {
-            if (text.contains("+")) {
-                return String.valueOf(Integer.parseInt(inputs[0]) + Integer.parseInt(inputs[2]));
-            } else if (text.contains("-")) {
-                return String.valueOf(Integer.parseInt(inputs[0]) - Integer.parseInt(inputs[2]));
-            } else if (text.contains("*")) {
-                return String.valueOf(Integer.parseInt(inputs[0]) * Integer.parseInt(inputs[2]));
-            } else if (text.contains("/")) {
-                return String.valueOf(Integer.parseInt(inputs[0]) / Integer.parseInt(inputs[2]));
+            switch (inputs[1]) {
+                //inputs[1]は計算記号の部分だから、そこで場合分け
+                case "+":
+                    return String.valueOf(Double.parseDouble(inputs[0]) + Double.parseDouble(inputs[2]));
+                case "-":
+                    return String.valueOf(Double.parseDouble(inputs[0]) - Double.parseDouble(inputs[2]));
+                case "*":
+                    return String.valueOf(Double.parseDouble(inputs[0]) * Double.parseDouble(inputs[2]));
+                case "/":
+                    return String.valueOf(Double.parseDouble(inputs[0]) / Double.parseDouble(inputs[2]));
             }
         } catch (NumberFormatException e) {
             return "error";
@@ -197,4 +203,5 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
         return inputs[0];
     }
+
 }

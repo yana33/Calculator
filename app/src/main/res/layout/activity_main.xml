@@ -240,7 +240,7 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/button11"
+                    android:id="@+id/button_point"
                     android:textSize="24sp"
                     android:layout_alignBaseline="@+id/button9"
                     android:layout_alignBottom="@+id/button9"
@@ -250,7 +250,8 @@
                     android:layout_weight="1"
                     android:textAlignment="center"
                     android:layout_height="60dp"
-                    android:layout_width="110dp" />
+                    android:layout_width="110dp"
+                    android:text="." />
 
                 <Button
                     android:text="-"
